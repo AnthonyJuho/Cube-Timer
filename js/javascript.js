@@ -4,6 +4,7 @@ var div = document.getElementById('button');
 var ready = false;
 var start = false;
 var buttonexist = true;
+var interval;
 
 //Timer Ready
 button.addEventListener("mousedown", e=>{
@@ -11,7 +12,7 @@ button.addEventListener("mousedown", e=>{
         ready = true;
     }
 });
-div.addEventListener("mousedown", e=>{
+document.addEventListener("mousedown", e=>{
     if(!buttonexist){
         if(!start){
             ready = true;
@@ -20,10 +21,11 @@ div.addEventListener("mousedown", e=>{
 
 });
 //Timer End
-div.addEventListener("mousedown", e=>{
+document.addEventListener("mousedown", e=>{
     if(!buttonexist){
 
         if(start){
+            clearInterval(interval);
             start=false;
         }
     }
@@ -37,7 +39,7 @@ button.addEventListener("mouseup", e=>{
         StartEvent();
     }
 });
-div.addEventListener("mouseup", e=>{
+document.addEventListener("mouseup", e=>{
     if(!buttonexist){
 
         if(ready){
@@ -52,10 +54,7 @@ function StartEvent(){
 
     div.innerHTML = '<div id="timer">0</div>';
     var time = 0;
-    var interval = setInterval(function(){
-        if(!start){
-            clearInterval(interval);
-        }
+    interval = setInterval(function(){
         time++;
         var sign;
         if(time%10 == 0){
